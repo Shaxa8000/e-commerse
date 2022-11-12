@@ -78,12 +78,12 @@ class UI {
                 let cartItem = {...Storage.getProduct(id), amount: 1};
                 // add product to the cart
                 cart = [...cart, cartItem];
-                console.log(cart);
                 // save cart in local storage
                 Storage.saveCart(cart);
                 // set cart values
                 this.setCartValues(cart);
                 // display cart item
+                this.addCartItem(cartItem)
                 // show the cart
             })
           }
@@ -96,8 +96,25 @@ class UI {
             tempTotal += item.price * item.amount;
             ItemsTotal += item.amount;
         })
-        cartTotal.innerText = parseFloat(tempTotal.toFixed());
+        cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
         cartItems.innerText = ItemsTotal;
+    }
+    addCartItem(item) {
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+            <img src="" alt="product">
+            <div>
+                <h4>queen bed</h4>
+                <h5>$9.00</h5>
+                <span class="remove-item">remove</span>
+            </div>
+            <div>
+                <i class="fas fa-chevron-up"></i>
+                <p class="item-amount">1</p>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        `
     }
 }
 
